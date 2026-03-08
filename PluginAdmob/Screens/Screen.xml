@@ -1,0 +1,86 @@
+<body>
+<navigationstack>
+    <list navigationTitle="AdMob" xonAppear="playSystemSound:1013">
+        <section header="Banners">
+            <navigationlink destination="banners1">Fixed size Banners for Portrait</navigationlink>
+            <navigationlink destination="banners2">Fixed size Banners for Landscape</navigationlink>
+            <navigationlink destination="banners3">Custom sized Banners</navigationlink>
+        </section>
+                                                                            
+        <section header="RewardedAd">
+            <button action="loadRewardedAd:$rewardedAdTest1">loadRewardedAd ($rewardedAdTest1)</button>
+            <button action="showRewardedAd">showRewardedAd</button>
+            <button action="loadAndShowRewardedAd:$rewardedAdTest1">loadAndShowRewardedAd</button>
+        </section>
+                                                                                              
+        <section header="InterstitialAd">
+            <button action="loadInterstitialAd:$interstitialAdTest1">loadInterstitialAd ($interstitialAdTest1)</button>
+            <button action="showInterstitialAd">showInterstitialAd</button>
+            <button action="loadAndShowInterstitialAd:$interstitialAdTest1">loadAndShowInterstitialAd</button>
+        </section>
+    </list>
+
+    <admobbanner adUnitID="$bannerAdTest1"/>
+</navigationstack>
+
+<vstack id="banners1" xforegroundColor="secondary">
+    <admobbanner adUnitID="ca-app-pub-3940256099942544/2934735716"/>
+
+    <text>AdSizeMediumRectangle 300x250</text>
+    <admobbanner adUnitID="ca-app-pub-3940256099942544/2934735716" adSize="300x250"/>
+
+    <text>AdSizeLargeBanner 320x100</text>
+    <admobbanner adUnitID="ca-app-pub-3940256099942544/2934735716" adSize="320x100"/>
+
+    <text>AdSizeBanner 320x50</text>
+    <admobbanner adUnitID="ca-app-pub-3940256099942544/2934735716" adSize="320x50"/>
+</vstack>
+                                                                
+<vstack id="banners2">
+    <text>Smart Banner</text>
+    <admobbanner adUnitID="$bannerAdTest1"/>
+
+    <text>AdSizeFullBanner Typically 468x60</text>
+    <admobbanner adUnitID="$bannerAdTest1" adSize="AdSizeFullBanner"/>
+
+    <text>AdSizeLeaderboard Typically 728x90</text>
+    <admobbanner adUnitID="$bannerAdTest1" adSize="AdSizeLeaderboard"/>
+</vstack>
+                                                                            
+<vstack id="banners3">
+    <text>Smart Banner</text>
+    <admobbanner adUnitID="$bannerAdTest1"/>
+
+    <text>width:360;height:50</text>
+    <admobbanner adUnitID="$bannerAdTest1" adSize="width:360;height:50"/>
+
+    <text>width:300;height:100</text>
+    <admobbanner adUnitID="$bannerAdTest1" adSize="width:300;height:100"/>
+                                                                            
+    <text>width:300;height:150</text>
+    <admobbanner adUnitID="$bannerAdTest1" adSize="width:300;height:150"/>
+</vstack>
+
+<!--Test ads ids -->
+<setDefault key="bannerAdTest1" type="string" value="ca-app-pub-3940256099942544/2934735716"/>
+<setDefault key="interstitialAdTest1" type="string" value="ca-app-pub-3940256099942544/4411468910"/>
+<setDefault key="rewardedAdTest1" type="string" value="ca-app-pub-3940256099942544/5224354917"/>
+                                                                            
+<!--Ad Events-->
+<event onAdLoaded="ca-app-pub-3940256099942544/4411468910" action="presentAlert:alertOnAdLoaded"/>
+<event onAdLoadFailed="ca-app-pub-3940256099942544/4411468910" action="presentAlert:alertOnAdLoadFailed"/>
+
+<event onAdLoaded="ca-app-pub-3940256099942544/5224354917" action="presentAlert:alertOnRewardedAdLoaded"/>
+<event onAdLoadFailed="ca-app-pub-3940256099942544/5224354917" action="presentAlert:alertOnRewardedAdLoadFailed"/>
+<event onAdRewardGranted="ca-app-pub-3940256099942544/5224354917" action="presentAlert:alertOnRewardedAdReward"/>
+
+<dialogs>
+    <alert id="alertOnAdLoaded" alertTitle="Loaded" alertMessage="InterstitialAd with id $interstitialAdTest1 loaded"/>
+    <alert id="alertOnAdLoadFailed" alertTitle="Failed" alertMessage="InterstitialAd with id $interstitialAdTest1 failed to load"/>
+    
+    <alert id="alertOnRewardedAdLoaded" alertTitle="Loaded" alertMessage="RewardedAd with id $rewardedAdTest1 loaded"/>
+    <alert id="alertOnRewardedAdLoadFailed" alertTitle="Failed" alertMessage="RewardedAd with id $rewardedAdTest1 failed to load"/>
+    <alert id="alertOnRewardedAdReward" alertTitle="Reward Granted" alertMessage="Received reward: $rewardedAdReward"/>
+</dialogs>
+                                                                            
+</body>
